@@ -8,6 +8,13 @@ language: go
 go:
   - 1.8
 
+env:
+  global:
+    - DEPLOY_BRANCH="master"
+    - HEROKU_APP="connotation-api"
+    - secure: "N79ZQG6jUTP5o0YSc1dTtb02PV+1j6sjM/DlvtCEcdaiPiEHSxcu6sr4ljbmzH6ZsQYPynfwshoO724wjLSdukRuayVd5qz/XcKDgGh8g5A2ebf76wpQmyBdokk58JxZ6IhrXqy0OqyqO+H7fxd+Ts65qZt0O51jjt6z78eoQIfy5vf34iKArhZ8GRcpUprSaU03dLB1O0UUfy4G6HbM2CTYDNIC7QI1YPkIAtrQN813gvQmGa0Pluzy08OGQnfSP4xEb1x3YqoxjTFjcLcnx3zTnA0iwMWXucGDPCw2bfD7VzQvDsjyyk1J9laUPuz5hFLjg5giHco5W4M4BirgOTDySyFDUyq/FKMgETRJEC7Ax5XYNoZRWtGVQTu7B8kVz7KU46x3AHuvJ3/I63tF+/aF/MDzHsHwsvDhQkvxqd5K/4knzDkr7+C549bZDtegQbCaFPQO+IX0+6QP+KU4i9XQKVGL1peqhxOhuZ1avuWTO8YXa9CSjOcuTICCKnkc+HAfHTyYNqb33zniqsyuAzKAP4i/iyZHwMXvT85mjx0JEPz3RHHk/U4N+r9MLowXQgTa7hb3XAV2F1j6V7v6TZHRtf5rnmsO7+cXoO6Lk/HBiOR9RZQcNToFlbHZAoPlrC489Q2FfAmwkz/rCnnOefWd7bXj2YBHML3Cws+4j/Y="
+    - secure: "L08rVW1wuAz5PH3412hDs+sRMar4EngOPeWHwJomrsHkJEZOY99R5A4j3yiAJkxG0Dog5cr8YSPzCCnguDrBy7Ok5lcUXSSCiaNfzUwhhp9cUPhln30UPnZm4tI1jYlPuEp7IzPehg4YHrGnQVyRRyevSpRYL9X3v1wAqlFZDNMxAHIIxp2V1IOY0/XKq9cdaZRAroazpGLjxDeVPZ5uRiZApViVqKc7MKr1/0Vckopz0Z/4/tx1aAbRDQXQkP2fjSxMvfykrpgb1MbMlBqb/UfWCYxpH78R6wRiaTCxsphbT0sTGC2ci2Sg/QNZCd9jAB5+HmzSNKyT+nxooViKRMebHirbtytdkWGoAyKBcwTs+uJIqtK35Y/depNLTf2awXfhisGGTJEKNKZXG2UKV5LLBSXoDDTqiFBDbC2ipcqeb+KWLaNKjQD00wip4W3nckSDw1nsQcHzRCljeo8Ezsvpda4ZNOnMkmCJ7kXFJSQ3onkPX7THJOLFTwXrVpwMKWp5ReJOZEMtw7PMhdJVdGNwRhIyeHCCldcxr2haGtw7N79Zxi9TdHf5i3+H3I+9iwI5/rtm9gtYTZPsiPMEcHlIkZYrUH02YOpy+uxcUOp7X8E8WydU3KRD6fENsi3wLt/iESZ0+u56bSJnjNjCj3AcYtEuiSI/AqAf0sIgxz4="
+
 before_install:
   - go get -u -v github.com/golang/dep/cmd/dep
   - go get -u -v github.com/gobuffalo/buffalo/buffalo
@@ -22,10 +29,5 @@ script:
   - buffalo test ./internal/...
   - buffalo build
 
-deploy:
-  provider: heroku
-  api_key:
-    secure: 22Pv8Pe10drSPycL6mZtX6Y9Pw8GJTK5Aq3DgBYW7wXEbTTFU6f9ghWZ1mdFW0xmmvARmyb0IuoKtO8xfcOZToSk50K7GxBQkgLcKx77h4IMsGOCG3ep2PHbC9A8VYFnwmEb7VwUXOsaIUuXjOHmNwllyinOLEhbumsp9ENBWh+qAcfs1/kGhShUjzFH4VtTsid9i8fkPPGWeARkfOgI3MU/dpcRjWw1VsEN8qI7gnn8sO3VGiYgBun6+iQUiUCDfcu6gntbR4fShU9sFD34Nx15MQEaUt21W8/CKiFK1IkC3wmK04S2n29wneQxcYKbB+RNy8ipZj3oytJJI6yvsXiF6MQHBBBs48Hgojtls0L0JSGDVKyLAaIFM7+cueE80G8z83FzGy1WLaN8HqUs7e0tkW8QQAaHU1Rf8TcyYHaesccqvHpSP3XhqkcZ7loLNv5BCoRvuTbdGq/0E4dVYWZG2Ajl9ZIxuBo7rnRlwE4nVYwqRrt2qANO/kpZeQnUC+plZ6c9M4MPRLepABQ40TnQF1Rvn2cr2cURIpXFAn2HCm8Nc4oVrldthSnWEVUawjvj9skYyvoI8sBWXhBYerHyngYbnRh8PyNTkovXFYUWqcQzUfm0T2URIgchsPsQZFXTNS9SHielJJJ6RDM/CohHhJqezXX9dDVXB/Z01sY=
-  app: connotation-api
-    # master: connotation-api
-  run: "heroku container:push web"
+after_success:
+  - ./scripts/deploy.sh
