@@ -59,6 +59,8 @@ func App() *buffalo.App {
 
 		app.GET("/allwords", AllWordsHandler)
 
+		app.POST("/train", TrainWordHandler)
+
 		app.ServeFiles("/assets", packr.NewBox("../public/assets"))
 	}
 
