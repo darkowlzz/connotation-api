@@ -1,3 +1,8 @@
+sudo: required
+
+services:
+  - docker
+
 language: go
 
 go:
@@ -16,3 +21,10 @@ install:
 script:
   - buffalo test ./internal/...
   - buffalo build
+
+deploy:
+  api_key:
+    secure: 22Pv8Pe10drSPycL6mZtX6Y9Pw8GJTK5Aq3DgBYW7wXEbTTFU6f9ghWZ1mdFW0xmmvARmyb0IuoKtO8xfcOZToSk50K7GxBQkgLcKx77h4IMsGOCG3ep2PHbC9A8VYFnwmEb7VwUXOsaIUuXjOHmNwllyinOLEhbumsp9ENBWh+qAcfs1/kGhShUjzFH4VtTsid9i8fkPPGWeARkfOgI3MU/dpcRjWw1VsEN8qI7gnn8sO3VGiYgBun6+iQUiUCDfcu6gntbR4fShU9sFD34Nx15MQEaUt21W8/CKiFK1IkC3wmK04S2n29wneQxcYKbB+RNy8ipZj3oytJJI6yvsXiF6MQHBBBs48Hgojtls0L0JSGDVKyLAaIFM7+cueE80G8z83FzGy1WLaN8HqUs7e0tkW8QQAaHU1Rf8TcyYHaesccqvHpSP3XhqkcZ7loLNv5BCoRvuTbdGq/0E4dVYWZG2Ajl9ZIxuBo7rnRlwE4nVYwqRrt2qANO/kpZeQnUC+plZ6c9M4MPRLepABQ40TnQF1Rvn2cr2cURIpXFAn2HCm8Nc4oVrldthSnWEVUawjvj9skYyvoI8sBWXhBYerHyngYbnRh8PyNTkovXFYUWqcQzUfm0T2URIgchsPsQZFXTNS9SHielJJJ6RDM/CohHhJqezXX9dDVXB/Z01sY=
+  app: connotation-api
+    # master: connotation-api
+  run: "heroku container:push web"
