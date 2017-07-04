@@ -2,8 +2,8 @@ package actions
 
 import (
 	"log"
+	"strings"
 
-	"github.com/darkowlzz/connotation-api/internal/fs"
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/buffalo/middleware"
 	"github.com/gobuffalo/buffalo/middleware/csrf"
@@ -11,6 +11,8 @@ import (
 
 	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/packr"
+
+	asset "github.com/darkowlzz/connotation-api/internal/asset"
 )
 
 // ENV is used to help switch settings based on where the
@@ -68,10 +70,11 @@ func App() *buffalo.App {
 }
 
 func appendWordsFromFile(origSlice []string, filepath string) []string {
-	newWords, err := fs.GetWordsFromFile(filepath)
+	newByteWords, err := asset.Asset(filepath)
 	if err != nil {
 		log.Println(err)
 	}
+	newWords := strings.Split(string(newByteWords), "\n")
 	return append(origSlice, newWords...)
 }
 
