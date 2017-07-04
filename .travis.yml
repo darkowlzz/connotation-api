@@ -17,7 +17,7 @@ env:
 
 before_install:
   - sudo apt-get remove docker docker-engine docker.io
-  - wget -O ~/docker.deb https://download.docker.com/linux/ubuntu/dists/trusty/pool/stable/amd64/docker-ce_17.03.2~ce-0~ubuntu-trusty_amd64.deb && sudo dpkg -i ~/docker.deb
+  - wget -O ~/docker.deb https://download.docker.com/linux/ubuntu/dists/trusty/pool/stable/amd64/docker-ce_17.06.0~ce-0~ubuntu_amd64.deb && sudo dpkg -i ~/docker.deb
   - go get -u -v github.com/golang/dep/cmd/dep
   - go get -u -v github.com/gobuffalo/buffalo/buffalo
   - wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash && source ~/.nvm/nvm.sh && nvm install 6 && nvm use 6
