@@ -63,6 +63,8 @@ func App() *buffalo.App {
 
 		app.POST("/train", TrainWordHandler)
 
+		app.GET("/ping", PingHandler)
+
 		app.ServeFiles("/assets", packr.NewBox("../public/assets"))
 	}
 
