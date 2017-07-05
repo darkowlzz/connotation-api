@@ -15,7 +15,7 @@ FROM alpine
 RUN apk add --no-cache bash
 
 # Comment out to run the binary in "production" mode:
-# ENV GO_ENV=production
+ENV GO_ENV=production
 
 WORKDIR /bin/
 

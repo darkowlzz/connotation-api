@@ -16,7 +16,6 @@ env:
     - secure: "L08rVW1wuAz5PH3412hDs+sRMar4EngOPeWHwJomrsHkJEZOY99R5A4j3yiAJkxG0Dog5cr8YSPzCCnguDrBy7Ok5lcUXSSCiaNfzUwhhp9cUPhln30UPnZm4tI1jYlPuEp7IzPehg4YHrGnQVyRRyevSpRYL9X3v1wAqlFZDNMxAHIIxp2V1IOY0/XKq9cdaZRAroazpGLjxDeVPZ5uRiZApViVqKc7MKr1/0Vckopz0Z/4/tx1aAbRDQXQkP2fjSxMvfykrpgb1MbMlBqb/UfWCYxpH78R6wRiaTCxsphbT0sTGC2ci2Sg/QNZCd9jAB5+HmzSNKyT+nxooViKRMebHirbtytdkWGoAyKBcwTs+uJIqtK35Y/depNLTf2awXfhisGGTJEKNKZXG2UKV5LLBSXoDDTqiFBDbC2ipcqeb+KWLaNKjQD00wip4W3nckSDw1nsQcHzRCljeo8Ezsvpda4ZNOnMkmCJ7kXFJSQ3onkPX7THJOLFTwXrVpwMKWp5ReJOZEMtw7PMhdJVdGNwRhIyeHCCldcxr2haGtw7N79Zxi9TdHf5i3+H3I+9iwI5/rtm9gtYTZPsiPMEcHlIkZYrUH02YOpy+uxcUOp7X8E8WydU3KRD6fENsi3wLt/iESZ0+u56bSJnjNjCj3AcYtEuiSI/AqAf0sIgxz4="
 
 before_install:
-  - sudo apt-get remove docker docker-engine docker.io
   - wget -O ~/docker.deb https://download.docker.com/linux/ubuntu/dists/trusty/pool/stable/amd64/docker-ce_17.06.0~ce-0~ubuntu_amd64.deb && sudo dpkg -i ~/docker.deb
   - go get -u -v github.com/golang/dep/cmd/dep
   - go get -u -v github.com/gobuffalo/buffalo/buffalo
